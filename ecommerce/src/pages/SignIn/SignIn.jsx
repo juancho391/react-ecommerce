@@ -1,11 +1,8 @@
-import React from "react"
+import React from "react";
+import { Layout } from "../../components/Layout/Layout";
 
 function SignIn() {
-  return (
-    <>
-      <div className='bg-red-500'>Sign In</div>
-    </>
-  )
+  return <Layout>SIGN-IN</Layout>;
 }
 
-export {SignIn}
+export { SignIn };
