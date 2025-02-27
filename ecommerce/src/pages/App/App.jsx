@@ -3,7 +3,7 @@ import React from "react";
 import { Home } from "../home/home";
 import { MyOrder } from "../MyOrder/Myorder";
 import { MyAccount } from "../MyAccount/MyAccount";
-import { MyOrders } from "../MyOrders/Myorders";
+import { MyOrders } from "../MyOrders/MyOrders";
 import { NotFound } from "../NotFound/NotFound";
 import { SignIn } from "../SignIn/SignIn";
 import { NavBar } from "../../components/Navbar/Navbar";
