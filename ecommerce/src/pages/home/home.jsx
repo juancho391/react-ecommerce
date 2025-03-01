@@ -1,24 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Layout } from "../../components/Layout/Layout";
 import { Card } from "../../components/Card/Card";
 
 function Home() {
+  const [items, setItems] = useState(null);
+
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((response) => response.json())
+      .then((data) => setItems(data));
+  }, []);
   return (
     <Layout>
-      <Card
-        imageUrl={
-          "https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=400"
-        }
-        productName={"HeadPhones"}
-        productPrice={1000}
-      />
-      <Card
-        imageUrl={
-          "https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        }
-        productName={"Apple Watch"}
-        productPrice={500}
-      />
+      <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
+        {items?.map((item) => (
+          <Card key={item.id} data={item} />
+        ))}
+      </div>
     </Layout>
   );
 }
