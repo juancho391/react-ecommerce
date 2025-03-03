@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import React from "react";
 import { ShoppingCartContext } from "../../Context/Context";
 import { useContext } from "react";
+import { LuShoppingCart } from "react-icons/lu";
 
 function NavBar() {
   const { count } = useContext(ShoppingCartContext);
@@ -90,13 +91,9 @@ function NavBar() {
             Sign-In
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            🛒{count}
-          </NavLink>
+        <li className="flex items-center">
+          <LuShoppingCart />
+          <div>{count}</div>
         </li>
       </ul>
     </nav>

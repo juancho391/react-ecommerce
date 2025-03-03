@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { CiCirclePlus } from "react-icons/ci";
 import { ShoppingCartContext } from "../../Context/Context";
 
 function Card(props) {
@@ -15,10 +16,10 @@ function Card(props) {
           alt={props.data.title}
         />
         <div
-          className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-3"
+          className="absolute top-0 right-0 bg-white flex justify-center items-center rounded-full p-1"
           onClick={() => setCount(count + 1)}
         >
-          +
+          <CiCirclePlus className="text-black p-auto rounded-full w-5 h-5" />
         </div>
       </figure>
       <p className="flex justify-between rounded-sm p-0.5">
