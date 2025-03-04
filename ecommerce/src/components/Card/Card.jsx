@@ -1,14 +1,20 @@
+import React from "react";
 import { useContext } from "react";
 import { CiCirclePlus } from "react-icons/ci";
 import { ShoppingCartContext } from "../../Context/Context";
 
 function Card(props) {
-  const { count, setCount, openProductDetail } =
+  const { count, setCount, openProductDetail, setProductToShow } =
     useContext(ShoppingCartContext);
+
+  const showProduct = (productDetail) => {
+    openProductDetail();
+    setProductToShow(productDetail);
+  };
   return (
     <div
       className="bg-white cursor-pointer w-56 h-60 box-shadow shadow-sm mb-5"
-      onClick={() => openProductDetail()}
+      onClick={() => showProduct(props.data)}
     >
       <figure className="relative mb-2 w-full h-4/5">
         <span className="absolute bottom-0 left-0 bg-white/90 text-black text-xs m-2 px-3 py-0.5 rounded-sm ">
