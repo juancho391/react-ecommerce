@@ -11,14 +11,14 @@ function ProductDetail() {
     <aside
       className={`${
         isProductDetailOpen ? "flex" : "hidden"
-      } w-[360px] flex-col fixed right-0 border border-black rounded-lg bg-white h-[calc(100vh-80px)]`}
+      } w-[380px] flex-col fixed right-0 border border-black rounded-lg bg-white h-[calc(100vh-80px)]`}
     >
-      <div
-        onClick={() => closeProductDetail()}
-        className="flex justify-between items-center p-6"
-      >
+      <div className="flex justify-between items-center p-6">
         <h2 className="font-medium text-xl">Detail</h2>
-        <HiOutlineXCircle className="size-6 cursor-pointer" />
+        <HiOutlineXCircle
+          onClick={() => closeProductDetail()}
+          className="size-6 cursor-pointer"
+        />
       </div>
       <figure className="px-6">
         <img
@@ -29,6 +29,7 @@ function ProductDetail() {
       </figure>
       <p className="flex flex-col p-6">
         <span className="font-medium text-md ">${productToShow.price}</span>
+        <span className="font-medium text-md ">{productToShow.category}</span>
         <span className="font-medium text-md ">{productToShow.title}</span>
         <span className="font-light text-md ">{productToShow.description}</span>
       </p>
