@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { HiOutlineXCircle } from "react-icons/hi";
 import { ShoppingCartContext } from "../../Context/Context";
 import { OrderCard } from "../OrderCard/OrderCard";
+import { totalPrice } from "../../utils";
 
 function CheckOutSideMenu() {
   const {
@@ -43,6 +44,14 @@ function CheckOutSideMenu() {
             handleDelete={handleDelete}
           />
         ))}
+      </div>
+      <div className="p-6">
+        <p className="flex justify-between items-center">
+          <span className="font-light">Total:</span>
+          <span className="font-medium text-2xl">
+            ${totalPrice(cartProducts)}
+          </span>
+        </p>
       </div>
     </aside>
   );
