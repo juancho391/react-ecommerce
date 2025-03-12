@@ -5,8 +5,17 @@ import { ShoppingCartContext } from "../../Context/Context";
 import { OrderCard } from "../OrderCard/OrderCard";
 
 function CheckOutSideMenu() {
-  const { closeCheckoutSideMenu, isCheckOutMenulOpen, cartProducts } =
-    useContext(ShoppingCartContext);
+  const {
+    closeCheckoutSideMenu,
+    isCheckOutMenulOpen,
+    cartProducts,
+    setCartProducts,
+  } = useContext(ShoppingCartContext);
+
+  const handleDelete = (id) => {
+    const filteredProducts = cartProducts.filter((product) => product.id != id);
+    setCartProducts(filteredProducts);
+  };
 
   console.log(cartProducts);
 
@@ -14,7 +23,7 @@ function CheckOutSideMenu() {
     <aside
       className={`${
         isCheckOutMenulOpen ? "flex" : "hidden"
-      } w-[380px] flex-col fixed right-0 border border-black rounded-lg bg-white h-[calc(100vh-80px)]`}
+      } w-[390px] flex-col fixed right-0 border border-black rounded-lg bg-white h-[calc(100vh-80px)]`}
     >
       <div className="flex justify-between items-center p-6">
         <h2 className="font-medium text-xl">My Order</h2>
@@ -27,9 +36,11 @@ function CheckOutSideMenu() {
         {cartProducts.map((product) => (
           <OrderCard
             key={product.id}
+            id={product.id}
             title={product.title}
             image={product.image}
             price={product.price}
+            handleDelete={handleDelete}
           />
         ))}
       </div>

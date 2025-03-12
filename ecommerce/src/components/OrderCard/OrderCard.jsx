@@ -17,7 +17,10 @@ function OrderCard(props) {
       </div>
       <div className="flex items-center gap-2">
         <p className="text-lg font-medium">${props.price}</p>
-        <HiOutlineXCircle className="w-6 h-6 cursor-pointer" />
+        <HiOutlineXCircle
+          onClick={() => props.handleDelete(props.id)}
+          className="w-6 h-6 cursor-pointer"
+        />
       </div>
     </div>
   );
