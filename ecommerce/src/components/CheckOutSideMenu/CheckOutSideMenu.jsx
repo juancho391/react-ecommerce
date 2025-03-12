@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { HiOutlineXCircle } from "react-icons/hi";
 import { ShoppingCartContext } from "../../Context/Context";
@@ -11,6 +12,8 @@ function CheckOutSideMenu() {
     isCheckOutMenulOpen,
     cartProducts,
     setCartProducts,
+    setOrder,
+    order,
   } = useContext(ShoppingCartContext);
 
   const handleDelete = (id) => {
@@ -18,7 +21,17 @@ function CheckOutSideMenu() {
     setCartProducts(filteredProducts);
   };
 
-  console.log(cartProducts);
+  const handleCheckOut = () => {
+    const orderToAdd = {
+      date: "01-02-2025",
+      products: cartProducts,
+      totalProducts: cartProducts.length,
+      totalPrice: totalPrice(cartProducts),
+    };
+    setOrder([...order, orderToAdd]);
+    setCartProducts([]);
+    closeCheckoutSideMenu();
+  };
 
   return (
     <aside
@@ -33,7 +46,7 @@ function CheckOutSideMenu() {
           className="size-6 cursor-pointer"
         />
       </div>
-      <div className="px-6 overflow-y-scroll">
+      <div className="px-6 overflow-y-scroll flex-1">
         {cartProducts.map((product) => (
           <OrderCard
             key={product.id}
@@ -46,12 +59,20 @@ function CheckOutSideMenu() {
         ))}
       </div>
       <div className="p-6">
-        <p className="flex justify-between items-center">
+        <p className="flex justify-between items-center mb-2">
           <span className="font-light">Total:</span>
           <span className="font-medium text-2xl">
             ${totalPrice(cartProducts)}
           </span>
         </p>
+        <Link to="/my-orders/last">
+          <button
+            className="border-1 rounded-lg w-full bg-black text-white shadow-2xl p-3 cursor-pointer mb-3"
+            onClick={() => handleCheckOut()}
+          >
+            Checkout
+          </button>
+        </Link>
       </div>
     </aside>
   );

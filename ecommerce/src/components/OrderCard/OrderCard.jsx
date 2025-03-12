@@ -1,6 +1,16 @@
 import { HiOutlineXCircle } from "react-icons/hi";
 
 function OrderCard(props) {
+  let renderHiOutlineXCircle;
+
+  if (props.handleDelete) {
+    renderHiOutlineXCircle = (
+      <HiOutlineXCircle
+        onClick={() => props.handleDelete(props.id)}
+        className="w-6 h-6 cursor-pointer"
+      />
+    );
+  }
   return (
     <div className="flex justify-between items-center mb-3">
       <div className="flex items-center gap-4">
@@ -17,10 +27,7 @@ function OrderCard(props) {
       </div>
       <div className="flex items-center gap-2">
         <p className="text-lg font-medium">${props.price}</p>
-        <HiOutlineXCircle
-          onClick={() => props.handleDelete(props.id)}
-          className="w-6 h-6 cursor-pointer"
-        />
+        {renderHiOutlineXCircle}
       </div>
     </div>
   );
