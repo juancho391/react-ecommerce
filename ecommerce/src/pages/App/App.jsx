@@ -1,5 +1,4 @@
 import { useRoutes, BrowserRouter } from "react-router-dom";
-import React from "react";
 import { Home } from "../home/home";
 import { MyOrder } from "../MyOrder/Myorder";
 import { MyAccount } from "../MyAccount/MyAccount";
