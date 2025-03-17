@@ -7,6 +7,9 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 
 function MyOrder() {
   const { order } = useContext(ShoppingCartContext);
+  const currentPath = window.location.pathname;
+  let index = currentPath.substring(currentPath.lastIndexOf("/") + 1);
+  if (index === "last") index = order?.length - 1;
 
   return (
     <Layout>
@@ -16,8 +19,8 @@ function MyOrder() {
         </Link>
         <h1>My Order</h1>
       </div>
-      <div className="w-150 flex flex-col">
-        {order.slice(-1)[0]?.products.map((product) => (
+      <div className="w-150 flex flex-col relative">
+        {order?.[index]?.products.map((product) => (
           <OrderCard
             key={product.id}
             id={product.id}
@@ -26,6 +29,11 @@ function MyOrder() {
             price={product.price}
           />
         ))}
+        <div className="mt-7">
+          <p className="absolute right-0 bottom-0 font-bold">
+            Total: ${order[0].totalPrice}
+          </p>
+        </div>
       </div>
     </Layout>
   );
