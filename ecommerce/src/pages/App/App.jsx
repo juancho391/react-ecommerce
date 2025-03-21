@@ -42,6 +42,14 @@ const AppRoutes = () => {
       path: "/*",
       element: <NotFound />,
     },
+    {
+      path: "/clothes",
+      element: <Home />,
+    },
+    {
+      path: "/electronics",
+      element: <Home />,
+    },
   ]);
 
   return routes;

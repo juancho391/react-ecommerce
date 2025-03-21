@@ -6,8 +6,9 @@ const ShoppingCartProvider = ({ children }) => {
   const [searchByTitle, setSearchByTitle] = useState("");
 
   //Fetch Products
-  const [items, setItems] = useState(null);
-  const [filteredItems, setFilteredItems] = useState(null);
+  const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [searchByCategory, setSearchByCategory] = useState(null);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -21,10 +22,55 @@ const ShoppingCartProvider = ({ children }) => {
     );
   };
 
+  const filteredItemsByCategory = (items, searchByCategory) => {
+    console.log("filtrando por category desde la funcion");
+    return items?.filter((item) =>
+      item.category.toLowerCase().includes(searchByCategory.toLowerCase())
+    );
+  };
+
+  const filterBy = (searchType, items, searchByCategory, searchByTitle) => {
+    if (searchType === "BY_TITLE") {
+      console.log("filtando por title");
+
+      return setFilteredItems(filteredItemsByTitle(items, searchByTitle));
+    }
+    if (searchType === "BY_CATEGORY") {
+      console.log("filtando solo por categoria");
+      return setFilteredItems(filteredItemsByCategory(items, searchByCategory));
+    }
+    if (searchType === "BY_TITLE_AND_CATEGORY") {
+      console.log("filtando por ambos");
+      return setFilteredItems(
+        filteredItemsByCategory(items, searchByCategory).filter((item) =>
+          item.title.toLowerCase().includes(searchByTitle.toLowerCase())
+        )
+      );
+    }
+    if (!searchType) return items;
+  };
+
   useEffect(() => {
-    if (searchByTitle)
-      setFilteredItems(filteredItemsByTitle(items, searchByTitle));
-  }, [items, searchByTitle]);
+    const applyFilters = () => {
+      if (searchByTitle && searchByCategory) {
+        filterBy(
+          "BY_TITLE_AND_CATEGORY",
+          items,
+          searchByCategory,
+          searchByTitle
+        );
+      } else if (searchByTitle) {
+        filterBy("BY_TITLE", items, searchByCategory, searchByTitle);
+      } else if (searchByCategory) {
+        console.log("filtrando category useeefct");
+        filterBy("BY_CATEGORY", items, searchByCategory, searchByTitle);
+      } else {
+        setFilteredItems(items);
+      }
+    };
+    applyFilters();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items, searchByTitle, searchByCategory]);
 
   //Cart Quantity
   const [count, setCount] = useState(0);
@@ -70,6 +116,8 @@ const ShoppingCartProvider = ({ children }) => {
         setSearchByTitle,
         filteredItems,
         setFilteredItems,
+        searchByCategory,
+        setSearchByCategory,
       }}
     >
       {children}

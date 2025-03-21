@@ -5,8 +5,13 @@ import { ProductDetail } from "../../components/ProductDetail/ProductDetail";
 import { ShoppingCartContext } from "../../Context/Context";
 
 function Home() {
-  const { items, setSearchByTitle, searchByTitle, filteredItems } =
-    useContext(ShoppingCartContext);
+  const {
+    items,
+    setSearchByTitle,
+    searchByTitle,
+    filteredItems,
+    searchByCategory,
+  } = useContext(ShoppingCartContext);
 
   const renderView = () => {
     if (searchByTitle?.length > 0) {
@@ -15,6 +20,9 @@ function Home() {
       } else {
         return <div> We dont have anything :(</div>;
       }
+    } else if (searchByCategory) {
+      console.log("entrando al if de category");
+      return filteredItems?.map((item) => <Card key={item.id} data={item} />);
     } else {
       return items?.map((item) => <Card key={item.id} data={item} />);
     }
