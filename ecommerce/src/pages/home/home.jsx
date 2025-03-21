@@ -5,7 +5,20 @@ import { ProductDetail } from "../../components/ProductDetail/ProductDetail";
 import { ShoppingCartContext } from "../../Context/Context";
 
 function Home() {
-  const { items, setSearchByTitle } = useContext(ShoppingCartContext);
+  const { items, setSearchByTitle, searchByTitle, filteredItems } =
+    useContext(ShoppingCartContext);
+
+  const renderView = () => {
+    if (searchByTitle?.length > 0) {
+      if (filteredItems?.length > 0) {
+        return filteredItems?.map((item) => <Card key={item.id} data={item} />);
+      } else {
+        return <div> We dont have anything :(</div>;
+      }
+    } else {
+      return items?.map((item) => <Card key={item.id} data={item} />);
+    }
+  };
 
   return (
     <Layout>
@@ -19,9 +32,7 @@ function Home() {
         onChange={(e) => setSearchByTitle(e.target.value)}
       />
       <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
-        {items?.map((item) => (
-          <Card key={item.id} data={item} />
-        ))}
+        {renderView()}
       </div>
       <ProductDetail />
     </Layout>

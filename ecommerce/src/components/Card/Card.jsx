@@ -1,4 +1,3 @@
-import React from "react";
 import { useContext } from "react";
 import { CiCirclePlus } from "react-icons/ci";
 import { ShoppingCartContext } from "../../Context/Context";

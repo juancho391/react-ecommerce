@@ -7,12 +7,24 @@ const ShoppingCartProvider = ({ children }) => {
 
   //Fetch Products
   const [items, setItems] = useState(null);
+  const [filteredItems, setFilteredItems] = useState(null);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((response) => response.json())
       .then((data) => setItems(data));
   }, []);
+
+  const filteredItemsByTitle = (items, searchByTitle) => {
+    return items?.filter((item) =>
+      item.title.toLowerCase().includes(searchByTitle.toLowerCase())
+    );
+  };
+
+  useEffect(() => {
+    if (searchByTitle)
+      setFilteredItems(filteredItemsByTitle(items, searchByTitle));
+  }, [items, searchByTitle]);
 
   //Cart Quantity
   const [count, setCount] = useState(0);
@@ -56,6 +68,8 @@ const ShoppingCartProvider = ({ children }) => {
         setItems,
         searchByTitle,
         setSearchByTitle,
+        filteredItems,
+        setFilteredItems,
       }}
     >
       {children}
