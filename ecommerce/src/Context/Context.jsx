@@ -23,7 +23,6 @@ const ShoppingCartProvider = ({ children }) => {
   };
 
   const filteredItemsByCategory = (items, searchByCategory) => {
-    console.log("filtrando por category desde la funcion");
     return items?.filter((item) =>
       item.category.toLowerCase().includes(searchByCategory.toLowerCase())
     );
@@ -31,16 +30,12 @@ const ShoppingCartProvider = ({ children }) => {
 
   const filterBy = (searchType, items, searchByCategory, searchByTitle) => {
     if (searchType === "BY_TITLE") {
-      console.log("filtando por title");
-
       return setFilteredItems(filteredItemsByTitle(items, searchByTitle));
     }
     if (searchType === "BY_CATEGORY") {
-      console.log("filtando solo por categoria");
       return setFilteredItems(filteredItemsByCategory(items, searchByCategory));
     }
     if (searchType === "BY_TITLE_AND_CATEGORY") {
-      console.log("filtando por ambos");
       return setFilteredItems(
         filteredItemsByCategory(items, searchByCategory).filter((item) =>
           item.title.toLowerCase().includes(searchByTitle.toLowerCase())
@@ -62,7 +57,6 @@ const ShoppingCartProvider = ({ children }) => {
       } else if (searchByTitle) {
         filterBy("BY_TITLE", items, searchByCategory, searchByTitle);
       } else if (searchByCategory) {
-        console.log("filtrando category useeefct");
         filterBy("BY_CATEGORY", items, searchByCategory, searchByTitle);
       } else {
         setFilteredItems(items);

@@ -21,7 +21,6 @@ function Home() {
         return <div> We dont have anything :(</div>;
       }
     } else if (searchByCategory) {
-      console.log("entrando al if de category");
       return filteredItems?.map((item) => <Card key={item.id} data={item} />);
     } else {
       return items?.map((item) => <Card key={item.id} data={item} />);

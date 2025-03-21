@@ -4,7 +4,8 @@ import { useContext } from "react";
 import { LuShoppingCart } from "react-icons/lu";
 
 function NavBar() {
-  const { count, setSearchByCategory } = useContext(ShoppingCartContext);
+  const { count, setSearchByCategory, openCheckoutSideMenu } =
+    useContext(ShoppingCartContext);
   const activeStyle = "underline underline-offset-4";
 
   return (
@@ -43,26 +44,10 @@ function NavBar() {
             Electronics
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/furnitures"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Furnitures
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/toys"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Toys
-          </NavLink>
-        </li>
       </ul>
       <ul className="flex items-center gap-3">
         <li className="text-black/60">
-          <NavLink>Juan@platzi.com</NavLink>
+          <NavLink>ByJuanBedoya</NavLink>
         </li>
         <li>
           <NavLink
@@ -72,24 +57,13 @@ function NavBar() {
             My Orders
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/my-account"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            My Account
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/sign-in"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Sign-In
-          </NavLink>
-        </li>
-        <li className="flex items-center">
-          <LuShoppingCart />
+        <li className="flex items-center cursor-pointer">
+          <LuShoppingCart
+            onClick={(e) => {
+              e.preventDefault();
+              openCheckoutSideMenu();
+            }}
+          />
           <div>{count}</div>
         </li>
       </ul>
